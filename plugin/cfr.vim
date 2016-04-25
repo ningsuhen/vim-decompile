@@ -47,6 +47,8 @@ function s:ReadClass(dir, classname)
   let l:decompile_command = s:GetCommand(a:classname)
   execute l:decompile_command
   0
+  setlocal ft=java
+  execute "normal! gg=G"
   setlocal readonly
   setlocal nomodified
 endfunction
