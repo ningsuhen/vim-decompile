@@ -37,7 +37,12 @@ endif
 
 " s:GetCommand: Acquire the command to execute for cfr. {{{2
 function! s:GetCommand(classname) abort
-    return "\%!java -jar " . g:cfr_jar_location . " " . g:cfr_jar_filename . " " . a:classname
+    if( has('win32unix') && executable('cygpath') )
+        " Cygwin users can end up mixing Windows and Unix paths here
+        return "\%!java -jar `cygpath -w " . g:cfr_jar_location . g:cfr_jar_filename . " " . a:classname . "`"
+    else
+        return "\%!java -jar " . g:cfr_jar_location . " " . g:cfr_jar_filename . " " . a:classname
+    endif
 endfunction
 "}}}2
 
