@@ -35,10 +35,17 @@ endif
 
 " Functions {{{1
 
+" s:GetCommand: Acquire the command to execute for cfr. {{{2
+function! s:GetCommand(classname) abort
+    return "\%!java -jar " . g:cfr_jar_location . " " . g:cfr_jar_filename . " " . a:classname
+endfunction
+"}}}2
+
 " s:ReadClass: Read a class into memory and decompile it {{{2
 function s:ReadClass(dir, classname)
   execute "lcd " . a:dir
-  execute "\%!java -jar " . g:cfr_jar_location . g:cfr_jar_filename . " " . a:classname
+  let l:decompile_command = s:GetCommand(a:classname)
+  execute l:decompile_command
   0
   setlocal readonly
   setlocal nomodified
