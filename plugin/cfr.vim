@@ -41,7 +41,7 @@ function! s:GetCommand(classname) abort
         " Cygwin users can end up mixing Windows and Unix paths here
         return "\%!java -jar `cygpath -w " . g:cfr_jar_location . g:cfr_jar_filename . " " . a:classname . "`"
     else
-        return "\%!java -jar " . g:cfr_jar_location . " " . g:cfr_jar_filename . " " . a:classname
+        return "\%!java -jar " . g:cfr_jar_location . g:cfr_jar_filename . " " . a:classname
     endif
 endfunction
 "}}}2
