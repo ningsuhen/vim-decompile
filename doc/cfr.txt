@@ -39,6 +39,22 @@ http://www.benf.org/other/cfr                                   *cfr*
 =============================================================================
 DISCLAIMER                                                 *cfr-disclaimer*
 
+DO NOT USE THIS PLUGIN TO ACCESS MATERIAL WITHOUT PERMISSION.
+
+THIS INCLUDES:
+    - Unauthorized access of IP-protected software
+    - Hacking into systems of any kind
+    - Deliberate intrusion into obfuscated code
+
+The author of this plugin will not be held liable for any damages that may
+occur if you use this plugin for nefarious means. Refer to the |cfr-license|
+for details.
+
+This disclaimer is issued in accordance with the original wishes of the
+author of the cfr decompiler, which this plugin uses.
+
+You have been warned.
+
 =============================================================================
 USAGE                                                           *cfr-usage*
 
