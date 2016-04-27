@@ -26,6 +26,16 @@ CONTENTS                                                     *cfr-contents*
 =============================================================================
 INTRODUCTION                                                    *cfr-intro*
 
+|vim-cfr| is a plugin that leverages the power of the cfr decompiler to
+decompile Java class files in real time.
+
+|vim-cfr| was inspired by a vim tip for decompilation with jad, an alternative
+Java decompiler.
+http://vim.wikia.com/wiki/Decompile_Java_.class_files_automatically
+
+This plugin requires the installation of cfr, which can be found here:
+http://www.benf.org/other/cfr                                   *cfr*
+
 =============================================================================
 DISCLAIMER                                                 *cfr-disclaimer*
 
