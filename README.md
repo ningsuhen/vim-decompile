@@ -1,4 +1,4 @@
-# vim-cfr
+# vim-cfr 
 
 Need a Java .class file YOU need decompiling?
 CFR it!
@@ -18,8 +18,8 @@ It uses the CFR Java decompiler to work.
 
 # Configuration
 
- - g:cfr\_jar\_location -- Used to find where cfr is. Empty by default.
- - g:cfr\_jar\_filename -- Used if cfr is a different filename for some reason. Set to the latest release by default.
+ - g:cfr\_jar\_location - Used to find where cfr is. Empty by default.
+ - g:cfr\_jar\_filename - Used if cfr is a different filename for some reason. Set to the latest release by default.
 
 
 # CFR
