@@ -58,6 +58,15 @@ You have been warned.
 =============================================================================
 USAGE                                                           *cfr-usage*
 
+    0. Install cfr.jar
+    1. Install the plugin
+    2. Open a previously-compiled java class
+    3. See a syntax-highlighted, indented, decompiled version of the class
+
+As |vim-cfr| usage is intended to be automatic (barring some configuration,
+which you can read about in |cfr-config|), it should work automatically once
+you set it up. If not, feel free to contact me.
+
 =============================================================================
 CONFIGURATION                                                  *cfr-config*
 
