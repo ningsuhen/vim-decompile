@@ -70,6 +70,25 @@ you set it up. If not, feel free to contact me.
 =============================================================================
 CONFIGURATION                                                  *cfr-config*
 
+The following variables are available to configure |vim-cfr|:
+
+*g:cfr_jar_location*
+    Determines the location of the cfr jar file. The path should be complete,
+    with a trailing slash (`/`).
+
+    let g:cfr_jar_location='/path/to/cfr/'
+
+    Defaults to an empty string (`''`).
+
+
+*g:cfr_jar_filename*
+    Determines what the filename of the cfr jar is, if you feel inclined to
+    change it or if it is updated without my knowledge.
+
+    let g:cfr_jar_filename='ceeeffar.jar'
+
+    Defaults to the current release (`cfr_0_115.jar`).
+
 =============================================================================
 LICENSE                                                       *cfr-license*
 
