@@ -37,7 +37,7 @@ endfunction
 
 " s:GetDefaultCommand: Acquire the default decompilation command. {{{2
 function! s:GetDefaultCommand(classname)
-    return ""
+    return "\%!javap -v -private " . s:LocalPath( a:classname )
 endfunction
 "}}}2
 
