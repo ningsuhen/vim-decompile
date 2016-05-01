@@ -24,21 +24,43 @@ endif
 
 " Functions {{{1
 
-" s:GetCommand: Acquire the command to execute. {{{2
-function! s:GetCommand(classname) abort
+" s:LocalPath: Acquire the local path. Used for portability. {{{2
+function! s:LocalPath(path)
     if( has('win32unix') && executable('cygpath') )
         " Cygwin users can end up mixing Windows and Unix paths here
-        return "\%!java -jar `cygpath -w " . g:decomp_jar . " " . a:classname . "`"
+        return "$(cygpath -w " . a:path . ")"
     else
-        return "\%!java -jar " . g:decomp_jar . " " . a:classname
+        return a:path
     endif
+endfunction
+"}}}2
+
+" s:GetDefaultCommand: Acquire the default decompilation command. {{{2
+function! s:GetDefaultCommand(classname)
+    return ""
+endfunction
+"}}}2
+
+" s:GetCustomJarCommand: Acquire a command defined by the user. {{{2
+function! s:GetCustomJarCommand(classname)
+    let l:jarpath = g:decomp_jar . " " . a:classname
+    return "\%!java -jar " . s:LocalPath( l:jarpath )
+endfunction
+"}}}2
+
+" s:GetCommand: Acquire the command to execute. {{{2
+function! s:GetCommand(classname) abort
+    if( exists("g:decomp_jar") && g:decomp_jar !=# '' )
+        return s:GetCustomJarCommand(a:classname)
+    else
+        return s:GetDefaultCommand(a:classname)
 endfunction
 "}}}2
 
 " s:ReadClass: Read a class into memory and decompile it {{{2
 function s:ReadClass(dir, classname)
   execute "lcd " . a:dir
-  " execute "saveas " . fnameescape(tempname())
+  " execute \"saveas " . fnameescape(tempname())
   let l:decompile_command = s:GetCommand(a:classname)
   execute l:decompile_command
   0
