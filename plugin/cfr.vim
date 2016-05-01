@@ -48,7 +48,7 @@ endfunction
 
 " s:ReadClass: Read a class into memory and decompile it {{{2
 function s:ReadClass(dir, classname)
-  execute "lcd " . a:dir
+  execute "saveas " . fnameescape(tempname())
   let l:decompile_command = s:GetCommand(a:classname)
   execute l:decompile_command
   0
