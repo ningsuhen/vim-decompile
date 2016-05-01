@@ -13,18 +13,10 @@ endif
 let g:loaded_decomp = 1
 "}}}2
 
-" g:decomp_jar_location (default '') {{{2
-" Use complete path from root, with trailing slash
-if( !exists("g:decomp_jar_location") )
-    let g:decomp_jar_location = ''
-endif
-"}}}2
-
-" g:decompile_filename (default 'cfr_0_115.jar') {{{2
-" Uses latest version of cfr by default
-" http://www.benf.org/other/cfr/
-if( !exists("g:decomp_jar_filename") )
-    let g:decomp_jar_filename = 'cfr_0_115.jar'
+" g:decomp_jar (default '') {{{2
+" Specifies a jarfile to use for decompilation
+if( !exists("g:decomp_jar") )
+    let g:decomp_jar = ''
 endif
 "}}}2
 
@@ -36,16 +28,17 @@ endif
 function! s:GetCommand(classname) abort
     if( has('win32unix') && executable('cygpath') )
         " Cygwin users can end up mixing Windows and Unix paths here
-        return "\%!java -jar `cygpath -w " . g:decomp_jar_location . g:decomp_jar_filename . " " . a:classname . "`"
+        return "\%!java -jar `cygpath -w " . g:decomp_jar . " " . a:classname . "`"
     else
-        return "\%!java -jar " . g:decomp_jar_location . g:decomp_jar_filename . " " . a:classname
+        return "\%!java -jar " . g:decomp_jar . " " . a:classname
     endif
 endfunction
 "}}}2
 
 " s:ReadClass: Read a class into memory and decompile it {{{2
 function s:ReadClass(dir, classname)
-  execute "saveas " . fnameescape(tempname())
+  execute "lcd " . a:dir
+  " execute "saveas " . fnameescape(tempname())
   let l:decompile_command = s:GetCommand(a:classname)
   execute l:decompile_command
   0

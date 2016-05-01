@@ -59,30 +59,22 @@ USAGE                                                           *decompile-usage
     2. Open a previously-compiled java class
     3. See a syntax-highlighted, indented, decompiled version of the class
 
-As |vim-cfr| usage is intended to be automatic (barring some configuration,
+As |vim-decompile| usage is intended to be automatic (barring some configuration,
 which you can read about in |decompile-config|), it should work automatically once
 you set it up. If not, feel free to contact me.
 
 =============================================================================
 CONFIGURATION                                                  *decompile-config*
 
-The following variables are available to configure |vim-cfr|:
+The following variables are available to configure |vim-decompile|:
 
-*g:decompile_jar_location*
-    Determines the location of the decompiler jar file. The path should be
-    complete, with a trailing slash (`/`).
+*g:decompile_jar*
+    Determines the filename and location of a custom jarfile for
+    decompilation.
 >
-    let g:decompile-jar_location='/path/to/decompiler/'
+    let g:decompile-jar_filename='cfr_0_115.jar'
 <
-    Defaults to an empty string (`''`).
-
-
-*g:decompile_jar_filename*
-    Determines what the filename of the decompiler jar is.
->
-    let g:decompile-jar_filename='cfr.jar'
-<
-    Defaults to the current release of cfr (`cfr_0_115.jar`).
+    Defaults to the empty string (`''`).
 
 =============================================================================
 LICENSE                                                       *decompile-license*
