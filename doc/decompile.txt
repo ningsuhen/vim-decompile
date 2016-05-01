@@ -18,9 +18,10 @@ CONTENTS                                                     *decompile-contents
 
     01. Intro.................................................. |decompile-intro|
     02. Disclaimer........................................ |decompile-disclaimer|
-    03. Usage.................................................. |decompile-usage|
-    04. Configuration......................................... |decompile-config|
-    05. License.............................................. |decompile-license|
+    03. Requirements ................................... |decompile-requirements|
+    04. Usage.................................................. |decompile-usage|
+    05. Configuration......................................... |decompile-config|
+    06. License.............................................. |decompile-license|
 
 =============================================================================
 INTRODUCTION                                                    *decompile-intro*
@@ -31,9 +32,6 @@ decompile Java class files in real time.
 |vim-decompile| was inspired by a vim tip for decompilation with jad, an alternative
 Java decompiler.
 http://vim.wikia.com/wiki/Decompile_Java_.class_files_automatically
-
-This plugin requires the installation of cfr, which can be found here:
-http://www.benf.org/other/cfr                                   *cfr*
 
 =============================================================================
 DISCLAIMER                                                 *decompile-disclaimer*
@@ -52,9 +50,17 @@ for details.
 You have been warned.
 
 =============================================================================
+REQUIREMENTS                                             *decompile-requirements*
+
+This plugin requires a relatively recent version of Java to be installed. You
+can find the latest version online.
+
+It is recommended you use this plugin on the most recent version of vim.
+
+=============================================================================
 USAGE                                                           *decompile-usage*
 
-    0. Install a decompilation jar such as cfr or procyon
+    0. Install Java or a decompilation jar such as cfr or procyon
     1. Install the plugin
     2. Open a previously-compiled java class
     3. See a syntax-highlighted, indented, decompiled version of the class
