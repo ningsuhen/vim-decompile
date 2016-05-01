@@ -25,7 +25,7 @@ endif
 " Functions {{{1
 
 " s:LocalPath: Acquire the local path. Used for portability. {{{2
-function! s:LocalPath(path)
+function! s:LocalPath(path) abort
     if( has('win32unix') && executable('cygpath') )
         " Cygwin users can end up mixing Windows and Unix paths here
         return "$(cygpath -w " . a:path . ")"
@@ -36,7 +36,7 @@ endfunction
 "}}}2
 
 " s:GetDefaultCommand: Acquire the default decompilation command. {{{2
-function! s:GetDefaultCommand(classname)
+function! s:GetDefaultCommand(classname) abort
     return "\%!javap -v -private " . s:LocalPath( a:classname )
 endfunction
 "}}}2
@@ -57,17 +57,26 @@ function! s:GetCommand(classname) abort
 endfunction
 "}}}2
 
+" s:SetOptions: Set the options based on the decompilation command. {{{2
+function! s:SetOptions(command) abort
+    if( a:command =~# "^java -jar .*" )
+        setlocal ft=java
+        execute "normal! gg=G"
+    endif
+
+    setlocal readonly
+    setlocal nomodified
+endfunction
+"}}}2
+
 " s:ReadClass: Read a class into memory and decompile it {{{2
-function s:ReadClass(dir, classname)
+function s:ReadClass(dir, classname) abort
   execute "lcd " . a:dir
   " execute \"saveas " . fnameescape(tempname())
   let l:decompile_command = s:GetCommand(a:classname)
   execute l:decompile_command
   0
-  setlocal ft=java
-  execute "normal! gg=G"
-  setlocal readonly
-  setlocal nomodified
+  call <SID>SetOptions( l:decompile_command )
 endfunction
 "}}}2
 
