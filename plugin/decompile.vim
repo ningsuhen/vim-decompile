@@ -36,8 +36,12 @@ endfunction
 "}}}2
 
 " s:GetDefaultCommand: Acquire the default decompilation command. {{{2
-function! s:GetDefaultCommand(classname) abort
-    return "\%!javap -v -private " . s:LocalPath( a:classname )
+function! s:GetDefaultCommand(classname, classpath) abort
+    let l:classpath_args = ""
+    if (a:classpath != "")
+      let l:classpath_args = " -cp ". a:classpath . " "
+    endif
+    return "\%!javap -private " . l:classpath_args . s:LocalPath( a:classname )
 endfunction
 "}}}2
 
@@ -49,43 +53,54 @@ endfunction
 "}}}2
 
 " s:GetCommand: Acquire the command to execute. {{{2
-function! s:GetCommand(classname) abort
+function! s:GetCommand(classname, classpath) abort
     if( exists("g:decomp_jar") && g:decomp_jar !=# '' )
         return s:GetCustomJarCommand(a:classname)
     else
-        return s:GetDefaultCommand(a:classname)
+        return s:GetDefaultCommand(a:classname, a:classpath)
 endfunction
 "}}}2
 
 " s:SetOptions: Set the options based on the decompilation command. {{{2
 function! s:SetOptions(command) abort
-    if( a:command =~# "^java -jar .*" )
+    "if( a:command =~# "^java -jar .*" )
         setlocal ft=java
         execute "normal! gg=G"
-    endif
+    "endif
 
     setlocal readonly
     setlocal nomodified
 endfunction
 "}}}2
 
-" s:ReadClass: Read a class into memory and decompile it {{{2
 function s:ReadClass(dir, classname) abort
-  execute "lcd " . a:dir
-  " execute \"saveas " . fnameescape(tempname())
-  let l:decompile_command = s:GetCommand(a:classname)
+
+  let l:classpath = ""
+  let l:package = ""
+  if (a:dir =~ "^zipfile://" && a:dir =~ "jar::")
+     let l:classpath = substitute(a:dir, "^zipfile://","", "")
+     let l:classpath = substitute(l:classpath, "\\.jar::.*", ".jar", "")
+
+     let l:package = substitute(a:dir, ".*\\.jar::","","")
+     let l:package = substitute(l:package, "/",".","g") . "."
+  endif
+  if (l:classpath == "")
+    execute "lcd " . a:dir
+  endif
+  let l:decompile_command = s:GetCommand(l:package . a:classname, l:classpath)
+
   execute l:decompile_command
-  0
+
   call <SID>SetOptions( l:decompile_command )
 endfunction
-"}}}2
+
 
 "}}}1
 
 " Augroup: java_decompile -- Automatically decompile when opening *.class {{{1
 augroup java_decompile
     au!
-    autocmd BufReadCmd *.class
+    autocmd BufEnter *.class
       \ call <SID>ReadClass(expand("<afile>:p:h"), expand("<afile>:t:r"))
 augroup END
 "}}}1
